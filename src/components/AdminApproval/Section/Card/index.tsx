@@ -10,7 +10,6 @@ import { eventProps } from '../../../../interface/Admin';
 function Card({ eData, handleButtonClick, breakdownType }: eventProps) {
   const startDate = moment(eData.startDate);
   const endDate = moment(eData.endDate);
- console.log(eData)
   return (
     <S.Card key={eData.eventId}>
       <S.CardContent>
@@ -27,11 +26,8 @@ function Card({ eData, handleButtonClick, breakdownType }: eventProps) {
         </S.EventTpyeWrap>
         <S.EventTypeDateWrap>
           <S.EventDate>{eData.eventType === 'ANNUAL' ? eData.startDate : eData.date}</S.EventDate>
-          {!startDate.isSameOrAfter(endDate) ? (
-            <S.EventDate style={{ marginLeft: '60px' }}>{eData.endDate}</S.EventDate>
-          ) : (
-            <span></span>
-          )}
+          <S.EventDate>{!startDate.isSameOrAfter(endDate) ?eData.endDate: <pre style={{whiteSpace:'pre'}}>                  </pre> } </S.EventDate>
+          
         </S.EventTypeDateWrap>
         <S.CreateDate>
           <span>{moment(eData.createdAt).format('YYYY-MM-DD HH:mm:ss').toLocaleString()}</span>

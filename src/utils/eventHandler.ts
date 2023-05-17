@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { getRequestList, postApproval } from '../api/request';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { ResponesData, eventProps } from '../interface/Admin';
+import { showToastSuccess } from '../components/common/Tostify';
 
 export const useAdminApproval = () => {
   const [eventType, setEventType] = useState<string>('annual');
@@ -28,6 +29,7 @@ export const useAdminApproval = () => {
   const { mutate: approval, status } = useMutation(postApproval, {
     onSuccess: () => {
       queryClient.invalidateQueries(['admin', eventType, breakdownType, pageNumber, type, keyword]);
+      showToastSuccess('승인 완료');
     },
   });
 
@@ -55,7 +57,7 @@ export const useAdminApproval = () => {
     setType(type);
   };
 
-  const handleInput = (keyword: string) => {
+  const handleSearchClick = (keyword: string) => {
     setKeyword(keyword);
   };
 
@@ -78,7 +80,7 @@ export const useAdminApproval = () => {
     handleSetPage,
     handleModalOpen,
     handleSelectType,
-    handleInput,
+    handleSearchClick,
     handleEventTypeSelect,
     approval,
     setShowModal,

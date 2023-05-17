@@ -1,7 +1,7 @@
 import BigCalendar from '../../common/BigCalendar';
 import * as S from './style';
 import { useState } from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import 'moment/locale/ko';
 import { useQuery } from 'react-query';
 import { getEventList } from '../../../api/mainService';
@@ -31,7 +31,7 @@ function AnnualSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [type, setType] = useState('ANNUAL');
 
-  const today = moment();
+  const today = moment.tz('Asia/Seoul');
   const { data } = useQuery(['eventList', type, today.format('YYYY-MM')], () =>
     getEventList(type, today.format('YYYY-MM')),
   );
