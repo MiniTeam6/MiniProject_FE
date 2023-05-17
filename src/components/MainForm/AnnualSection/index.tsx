@@ -1,7 +1,7 @@
 import BigCalendar from '../../common/BigCalendar';
 import * as S from './style';
 import { useState } from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import 'moment/locale/ko';
 import { useQuery } from 'react-query';
 import { getEventList } from '../../../api/mainService';
